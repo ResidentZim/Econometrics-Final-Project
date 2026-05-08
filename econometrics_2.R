@@ -54,8 +54,8 @@ df1 <- df1 %>% mutate(hisp_clean = case_when(
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # BPL
 df1 <- df1 %>% mutate(bpl_clean = case_when(
-  BPL > 13000 ~ 0, #born in US 
-  BPL < 13000 & BPL > 99999 ~ 1, #born outside US
+  BPL < 13000 ~ 0, #born in US 
+  BPL > 13000 & BPL < 99999 ~ 1, #born outside US
   TRUE          ~ 99 #NUI
 ))
 
@@ -75,7 +75,7 @@ df1 <- df1 %>% mutate(nativity_clean = case_when(
 df1 <- df1 %>% mutate(educ_clean = case_when(
   EDUC <= 073 ~ 1, # high school completion or less
   EDUC > 073 & EDUC <= 111 ~ 2, # bachelors or less
-  EDUC > 111 & EDUC >= 125 ~ 3,  # more than bach
+  EDUC > 111 & EDUC <= 125 ~ 3,  # more than bach
   TRUE           ~ 99 #NUI
 ))
 
@@ -83,9 +83,9 @@ df1 <- df1 %>% mutate(educ_clean = case_when(
 # REGION
 df1 <- df1 %>% mutate(region_clean = case_when(
   REGION > 20 ~ 1, #northeast
-  REGION < 20 & REGION > 30 ~ 2, #midwest
-  REGION < 30 & REGION > 40 ~ 3, #south
-  REGION < 40 & REGION > 50 ~ 4, #west
+  REGION > 20 & REGION < 30 ~ 2, #midwest
+  REGION > 30 & REGION < 40 ~ 3, #south
+  REGION > 40 & REGION < 50 ~ 4, #west
   TRUE ~ 99
 ))
 
@@ -112,4 +112,4 @@ df1 <- df1 %>% mutate(citizen_clean = case_when(
 ))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# write.csv(df1, "econometrics_v_4.csv", row.names = FALSE)
+write.csv(df1, "econometrics_v_5.csv", row.names = FALSE)
