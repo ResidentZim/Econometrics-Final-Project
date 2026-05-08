@@ -112,4 +112,4 @@ df1 <- df1 %>% mutate(citizen_clean = case_when(
 ))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-write.csv(df_filtered, "econometrics_v_3.csv", row.names = FALSE)
+write.csv(df1, "econometrics_v_4.csv", row.names = FALSE)
