@@ -82,7 +82,7 @@ df1 <- df1 %>% mutate(educ_clean = case_when(
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # REGION
 df1 <- df1 %>% mutate(region_clean = case_when(
-  REGION > 20 ~ 1, #northeast
+  REGION < 20 ~ 1, #northeast
   REGION > 20 & REGION < 30 ~ 2, #midwest
   REGION > 30 & REGION < 40 ~ 3, #south
   REGION > 40 & REGION < 50 ~ 4, #west
