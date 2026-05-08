@@ -20,6 +20,8 @@ df2 <- read_csv('econometrics_v_6.csv')
 #COMPUTING INCOMES INFLATION ADJUSTED TO 2000 CPI (1999 dollars)- 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#CPI values from https://cps.ipums.org/cps/cpi99.shtml 
+
 #HHINCOME INFLATION ADJUSTED
 df3 <- df3 %>%
   mutate(hhicome_clean = case_when(
