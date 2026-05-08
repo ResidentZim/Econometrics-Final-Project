@@ -1,4 +1,4 @@
-setwd('/Users/ando/Desktop/Econometrics/data')
+setwd('/Users/ando/Desktop/Econometrics/Econometrics Final Project')
 df <- read.csv('cps_00002.csv')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6,10 +6,9 @@ df <- read.csv('cps_00002.csv')
 library(gdata)
 library(dplyr)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 #creating the list of vars we want to keep
-vars <- c('YEAR', 'AGE', 'SEX', 'RACE', 'BPL', 'YRIMMIG', 'NATIVITY', 'HISPANIC', 'EDUC', 'TINTLANG', 'COUNTRY', 'REGION', 'STATEFIP', 'CITIZEN', 'HHINCOME', 'FTOTVAL', 'INCTOT')
- 
+vars <- c('YEAR', 'AGE', 'SEX', 'RACE', 'BPL', 'YRIMMIG', 'NATIVITY', 'HISPAN', 'EDUC', 'REGION', 'STATEFIP', 'CITIZEN', 'HHINCOME', 'FTOTVAL', 'INCTOT')
+
 #filtering the data by those selected vars
 df_filtered <- df[, names(df) %in% vars]
 
@@ -99,6 +98,6 @@ df_filtered$AGEATIMMIG <- df_filtered$yrimmig_year - df_filtered$YEAROFBIRTH
 #the census was taken to calculate birth year
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-write.csv(df_filtered, "econometrics_v_2.csv", row.names = FALSE)
+#write.csv(df_filtered, "econometrics_v_2_5.csv", row.names = FALSE)
 
 
