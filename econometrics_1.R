@@ -89,15 +89,7 @@ df_filtered <- df_filtered %>%
 
 #create an age at immigration var
 df_filtered$AGEATIMMIG <- df_filtered$yrimmig_year - df_filtered$YEAROFBIRTH
-
-#!!! FOR SOME REASON I AM GETTING PEOPLE WITH NEGATIVE AGE AT IMMIG, 
-#for some reason they are listed as having immigrated in 1949 or before 
-#but were not even born at the time
-
-#solved the above issue by using the year in which
-#the census was taken to calculate birth year
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#write.csv(df_filtered, "econometrics_v_2_5.csv", row.names = FALSE)
 
 
