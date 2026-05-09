@@ -10,11 +10,8 @@ df2 <- read_csv('econometrics_v_6.csv')
 #GETTING RID OF CERTAIN VALUES - 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Keep rows where 'var' is NOT "value"
-#df3 <- df2[df2$HHINCOME != 99999999 & df2$FTOTVAL != 9999999999 & df2$INCTOT != 999999999, ] 
-
-#im trying to get rid of values that are NUI but the code above is not filtering any obs,
-# which is weird. Not sure why.
+# Keep rows where INCOME TOTAL is not NA
+df3 <- df2 %>% filter(!is.na(INCTOT))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #COMPUTING INCOMES INFLATION ADJUSTED TO 2000 CPI (1999 dollars)- 
@@ -114,3 +111,22 @@ df3 <- df3 %>%
     YEAR == 2025 ~ INCTOT * 0.531,
     TRUE ~ INCTOT
   ))
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#FILTERING FOR IMMIGRANTS, AND FOR ERROR AGES - 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#filter a data set that includes only people who have data on immigrating
+df_immig <- df3 %>% filter(!is.na(AGEATIMMIG))
+
+#filter immigrants who have negative AGEATIMMIG 
+# (probable error in census or error in answering census)
+df_immig_2 <- df_immig %>% filter(AGEATIMMIG >= 0)
+
+# only 2% of the 492245 were negative ages. 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#DOWNLOAD NEW CSV - 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# write.csv(df_immig_2, 'econometrics_immigrants_0.csv', row.names = FALSE)
