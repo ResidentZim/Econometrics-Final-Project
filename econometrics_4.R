@@ -4,7 +4,16 @@ library(gdata)
 library(dplyr)
 library(readr)
 
-df2 <- read_csv('econometrics_v_6.csv')
+df2 <- read_csv('econometrics_v_7.csv')
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#NAMESPACE AFTER RUNNING CODE - 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# df2 : data frame after econometrics_3.R cleaning
+# df3 : data frame after inflation adjusting and filtering out NA income values
+# df_immig : data frame with non-immigrants taken out
+# df_immig_2 : data frame with non-immigrants taken out AND negative ages at immigration excluded
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #GETTING RID OF CERTAIN VALUES - 
@@ -129,4 +138,4 @@ df_immig_2 <- df_immig %>% filter(AGEATIMMIG >= 0)
 #DOWNLOAD NEW CSV - 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# write.csv(df_immig_2, 'econometrics_immigrants_0.csv', row.names = FALSE)
+write.csv(df_immig_2, 'econometrics_immigrants_1.csv', row.names = FALSE)
