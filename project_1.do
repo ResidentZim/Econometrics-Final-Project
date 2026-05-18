@@ -13,4 +13,6 @@ capture ssc install estout
 
 import delimited "econometrics_immigrants_0.csv", clear
 
-eststo t1: sum age sex_clean inctot_clean hhicome_clean ftotval_clean educ_clean, detail
+eststo t1: sum age sex_clean inctot_clean hhicome_clean ftotval_clean educ_clean ageatimmig, detail
+
+//add the csv that has years since immig, and think about what other variables to add
