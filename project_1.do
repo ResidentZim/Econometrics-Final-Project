@@ -1,0 +1,16 @@
+**********************************************************
+*Program: project_v1.do
+*Author: Alejandro Melguizo
+*Date: 5/22/26
+*Purpose: final project v1
+**********************************************************
+clear all
+capture log close
+cd "C:\Users\a.melguizo001\Documents\project"
+log using project_v1.log, replace
+
+capture ssc install estout
+
+import delimited "econometrics_immigrants_0.csv", clear
+
+eststo t1: sum age sex_clean inctot_clean hhicome_clean ftotval_clean educ_clean, detail
