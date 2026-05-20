@@ -1,16 +1,22 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ALEJANDRO MELGUIZO
+# DATE: 5/20/26
+# TOPIC: further cleaning, inflation adjusting, and filtering
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 setwd('/Users/ando/Desktop/Econometrics/Econometrics Final Project')
 
 library(gdata)
 library(dplyr)
 library(readr)
 
-df2 <- read_csv('econometrics_v_7.csv')
+df2 <- read_csv('econometrics_v_8.csv')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #NAMESPACE AFTER RUNNING CODE - 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# df2 : data frame after econometrics_3.R cleaning
+# df2 : data frame after econometrics_3_1.R cleaning
 # df3 : data frame after inflation adjusting and filtering out NA income values
 # df_immig : data frame with non-immigrants taken out
 # df_immig_2 : data frame with non-immigrants taken out AND negative ages at immigration excluded
@@ -132,10 +138,12 @@ df_immig <- df3 %>% filter(!is.na(AGEATIMMIG))
 # (probable error in census or error in answering census)
 df_immig_2 <- df_immig %>% filter(AGEATIMMIG >= 0)
 
-# only 2% of the 492245 were negative ages. 
+# only 2% of the 492245 observations where AGEATIMMIG != NA were negative ages. 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #DOWNLOAD NEW CSV - 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-write.csv(df_immig_2, 'econometrics_immigrants_1.csv', row.names = FALSE)
+write.csv(df_immig_2, 'econometrics_immigrants_v2.csv', row.names = FALSE)
+
+#v2 : ran with inctots > 0 only

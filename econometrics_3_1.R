@@ -1,13 +1,19 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ALEJANDRO MELGUIZO
+# DATE: 5/20/26
+# TOPIC: cleaning CPS data frame
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 setwd('/Users/ando/Desktop/Econometrics/Econometrics Final Project')
 df <- read.csv('cps_00002.csv')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library(gdata)
 library(dplyr)
-library(glue)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #creating the list of vars we want to keep
-vars <- c('YEAR', 'AGE', 'SEX', 'RACE', 'BPL', 'YRIMMIG', 'NATIVITY', 'HISPAN', 'EDUC', 'REGION', 'STATEFIP', 'CITIZEN', 'HHINCOME', 'FTOTVAL', 'INCTOT')
+vars <- c('YEAR', 'AGE', 'SEX', 'RACE', 'BPL', 'YRIMMIG', 'NATIVITY', 'HISPAN', 
+          'EDUC', 'REGION', 'STATEFIP', 'CITIZEN', 'HHINCOME', 'FTOTVAL', 'INCTOT')
 
 #filtering the data by those selected vars
 df1 <- df[, names(df) %in% vars]
@@ -19,6 +25,10 @@ df1 <- df[, names(df) %in% vars]
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #further filtering age to be between 25 and 65 years old
 df1 <- df1 %>% filter(AGE >= 25 & AGE <=65)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#filtering out INCTOT <= 0
+df1 <- df1 %>% filter(INCTOT > 0)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #create a variable for the year of birth to later calculate age at immigration
@@ -199,4 +209,6 @@ df1 <- df1 %>%
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #DOWNLOAD NEW CSV - 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-write.csv(df1, 'econometrics_v_7.csv', row.names = FALSE)
+#write.csv(df1, 'econometrics_v_8.csv', row.names = FALSE)
+
+#v8 : removed inctots <= 0 (5/20/26)
