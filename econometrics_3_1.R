@@ -5,7 +5,7 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 setwd('/Users/ando/Desktop/Econometrics/Econometrics Final Project')
-df <- read.csv('cps_00002.csv')
+df <- read.csv('cps_00003.csv')
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library(gdata)
@@ -13,7 +13,8 @@ library(dplyr)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #creating the list of vars we want to keep
 vars <- c('YEAR', 'AGE', 'SEX', 'RACE', 'BPL', 'YRIMMIG', 'NATIVITY', 'HISPAN', 
-          'EDUC', 'REGION', 'STATEFIP', 'CITIZEN', 'HHINCOME', 'FTOTVAL', 'INCTOT')
+          'EDUC', 'REGION', 'STATEFIP', 'CITIZEN', 'HHINCOME', 'FTOTVAL', 'INCTOT', 
+          'EMPSTAT', 'UHRSWORKT', 'INCWAGE')
 
 #filtering the data by those selected vars
 df1 <- df[, names(df) %in% vars]
@@ -205,10 +206,21 @@ df1 <- df1 %>%
   CITIZEN == 9 ~ NA_real_ #NIU
 ))
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# EMPSTAT
+df1 <- df1 %>% 
+  mutate(empstat_clean = case_when(
+    EMPSTAT >= 20 & EMPSTAT <= 22 ~ 0, #unemployed
+    EMPSTAT == 10 | EMPSTAT == 12 ~ 1, #employed
+    EMPSTAT == 01 ~ 2, #Armed Forces
+    EMPSTAT >= 30 ~ 3, #NILF
+    TRUE ~ NA_real_ #NUI
+  ))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #DOWNLOAD NEW CSV - 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#write.csv(df1, 'econometrics_v_8.csv', row.names = FALSE)
+write.csv(df1, 'econometrics_v_9.csv', row.names = FALSE)
 
 #v8 : removed inctots <= 0 (5/20/26)
+#v9 : added EMPSTAT UHRSWORKT INCWAGE vars (5/20/26)
