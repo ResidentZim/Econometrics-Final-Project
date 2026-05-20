@@ -37,7 +37,7 @@ df3 <- df3 %>% filter(!is.na(INCWAGE))
 
 #INCWAGE INFLATION ADJUSTED
 df3 <- df3 %>%
-  mutate(hhicome_clean = case_when(
+  mutate(incwage_clean = case_when(
     YEAR == 2001 ~ INCWAGE * 0.967,
     YEAR == 2002 ~ INCWAGE * 0.941,
     YEAR == 2003 ~ INCWAGE * 0.926,
